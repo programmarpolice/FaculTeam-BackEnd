@@ -12,3 +12,33 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+ id Int @id @default(autoincrement())
+ username String @unique
+ password String 
+ Departments Department []
+}
+
+model Department {
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  Banner String
+  address String
+  phone String
+
+  User User @relation(fields: [ownerId], references: [id])
+  ownerId Int
+  Professors Professor []
+}
+
+model Professor {
+  id Int @id @default(autoincrement())
+  name String
+  email String
+  profile String
+  phone String
+  bio String
+  Departments Department[]
+}
