@@ -27,7 +27,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/", authenticate, async (req, res, next) => {
-  const { name, email, profile, phone, bio, department } = req.body;
+  const { name, email, profile, phone, bio, DepartmentId } = req.body;
   try {
     const professor = await prisma.professor.create({
       data: {
@@ -36,7 +36,7 @@ router.post("/", authenticate, async (req, res, next) => {
         profile,
         phone,
         bio,
-        department: { connect: { id: department } },
+        DepartmentId: DepartmentId,
       },
     });
     res.status(201).json(professor);
@@ -45,4 +45,52 @@ router.post("/", authenticate, async (req, res, next) => {
   }
 });
 
+router.put("/:id", authenticate, async (req, res, next) => {
+  const { id } = req.params;
+  const { name, email, profile, phone, bio, Department } = req.body;
+  try {
+    // Check if the professor exists
+    const professor = await prisma.professor.findUnique({
+      where: { id: +id },
+    });
+    if (!professor) {
+      return next({
+        status: 404,
+        message: `Professor with id ${id} does not exist.`,
+      });
+    }
+
+    // Update the professor
+    const updatedProfessor = await prisma.professor.update({
+      where: { id: +id },
+      data: { name, email, profile, phone, bio, Department },
+    });
+    res.json(updatedProfessor);
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.delete("/:id", authenticate, async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    // Check if the professor exists
+    const professor = await prisma.professor.findUnique({
+      where: { id: +id },
+    });
+    if (!professor) {
+      return next({
+        status: 404,
+        message: `Professor with id ${id} does not exist.`,
+      });
+    }
+
+    // Delete the professor
+    await prisma.professor.delete({ where: { id: +id } });
+    res.sendStatus(204);
+  } catch (e) {
+    next(e);
+  }
+});
 module.exports = router;
