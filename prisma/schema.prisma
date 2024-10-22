@@ -38,6 +38,6 @@ model Professor {
   phone String
   bio String
 
-  Department Department @relation(fields: [DepartmentId], references: [id])
-  DepartmentId Int
+  Department Department? @relation(fields: [DepartmentId], references: [id])
+  DepartmentId Int?
 }

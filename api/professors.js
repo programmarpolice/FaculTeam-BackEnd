@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+const { authenticate } = require("./auth");
 const prisma = require("../prisma");
 
 router.get("/", async (req, res, next) => {
@@ -24,4 +25,24 @@ router.get("/:id", async (req, res, next) => {
     next(e);
   }
 });
+
+router.post("/", authenticate, async (req, res, next) => {
+  const { name, email, profile, phone, bio, department } = req.body;
+  try {
+    const professor = await prisma.professor.create({
+      data: {
+        name,
+        email,
+        profile,
+        phone,
+        bio,
+        department: { connect: { id: department } },
+      },
+    });
+    res.status(201).json(professor);
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;

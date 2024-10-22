@@ -28,11 +28,27 @@ GET {{host}}/professors
 ### Get professor by id
 GET {{host}}/professors/2
 
-### Get all departments
-GET {{host}}/departments
+### Post new professor
+POST {{host}}/professors
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
+{
+  "name": "Joe Schmoe",
+  "email": "So smart in academics",
+  "profile": "testing",
+  "phone": "(210) 444-5656",
+  "bio": "bunch of cool stuff about me",
+  "Department": 3,
+}
+
+### Update professor information
+
+### Get all departments
+GET {{host}}/departments
+
+### Get department by id
+GET {{host}}/departments/2
 
 ### Post new department for logged in user
 POST {{host}}/departments
@@ -40,10 +56,28 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "Professor Plum",
-  "description": "adfhlsdkfj",
+  "name": "Academics",
+  "description": "So smart in academics",
   "Banner": "testing",
-  "address": "teseting",
-  "phone": "testing",
+  "address": "Building 123",
+  "phone": "(210) 444-5656",
   "profIds": [1,2,3]
 }
+
+### Update department information
+PUT {{host}}/departments/3
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Science",
+  "description": "Super smart in academics",
+  "Banner": "testong",
+  "address": "Building 123",
+  "phone": "(210) 444-5656",
+  "profIds": [1,2,3]
+}
+
+### Delete deparment
+DELETE {{host}}/departments/6
+Authorization: Bearer {{token}}

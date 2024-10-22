@@ -25,14 +25,18 @@ The 🔒 lock icon next to a route indicates that it must be a protected route. 
 
 - `GET /professors` sends array of all professors
 - `GET /professors/:id` sends specific professor and all details of this professor
+- 🔒`PUT /professors/:id` updates the specific department
+- 🔒`DELETE /professors/:id` deletes the specific department
+- send 403 Forbidden if user is not logged in
 
 ### Department Routes
 
-- 🔒 `GET /deparments` sends array of all deparments
+- `GET /deparments` sends array of all deparments
+- `GET /departments/:id` sends specific order, including all professors
 - 🔒 `POST /departments` creates a new department by the logged in user
+
   - the request body should include the `Name`, a `Description`, `Images`, `Contact info` and ids of the professors
-- 🔒 `GET /departments/:id` sends specific order, including all professors
-  - if the logged-in user is not the one who made the order, send a 403 Forbidden error
+
 - 🔒`DELETE /deparment/:id` deletes the specific department
 - send 403 Forbidden if user is not logged in
 - 🔒`PUT /department/:id` updates the specific department
