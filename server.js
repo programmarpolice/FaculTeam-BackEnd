@@ -3,9 +3,12 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 
+const cors = require("cors");
+app.use(cors({ origin: /localhost/ }));
+
 app.use(express.json());
 app.use(require("./api/auth").router);
-// app.use("/departments", require("./api/departments"));
+app.use("/departments", require("./api/departments"));
 app.use("/professors", require("./api/professors"));
 
 app.use((req, res, next) => {

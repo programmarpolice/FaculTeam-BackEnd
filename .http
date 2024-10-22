@@ -19,8 +19,31 @@ Content-Type: application/json
   "password": "foobar"
 }
 
+###
+@token = {{login.response.body.token}}
+
 ### Get all professors
 GET {{host}}/professors
 
 ### Get professor by id
 GET {{host}}/professors/2
+
+### Get all departments
+GET {{host}}/departments
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+### Post new department for logged in user
+POST {{host}}/departments
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Professor Plum",
+  "description": "adfhlsdkfj",
+  "Banner": "testing",
+  "address": "teseting",
+  "phone": "testing",
+  "profIds": [1,2,3]
+}
