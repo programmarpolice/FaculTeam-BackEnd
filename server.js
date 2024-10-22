@@ -4,6 +4,9 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+app.use(require("./api/auth").router);
+// app.use("/departments", require("./api/departments"));
+app.use("/professors", require("./api/professors"));
 
 app.use((req, res, next) => {
   next({ status: 404, message: "Endpoint not found." });

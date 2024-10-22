@@ -1,0 +1,26 @@
+@host = http://localhost:3000
+
+### Register new customer
+POST {{host}}/register
+Content-Type: application/json
+
+{
+  "username": "foobarbaz",
+  "password": "foobar"
+}
+
+### Login
+# @name login
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "username": "foobarbaz",
+  "password": "foobar"
+}
+
+### Get all professors
+GET {{host}}/professors
+
+### Get professor by id
+GET {{host}}/professors/2
