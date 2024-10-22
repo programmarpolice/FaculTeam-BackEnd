@@ -35,14 +35,30 @@ Authorization: Bearer {{token}}
 
 {
   "name": "Joe Schmoe",
+  "email": "123@gmail.com",
+  "profile": "testing",
+  "phone": "(210) 444-5656",
+  "bio": "bunch of cool stuff about me",
+  "DepartmentId": 1
+}
+
+### Update professor information
+PUT {{host}}/professors/4
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Joe Schmoe",
   "email": "So smart in academics",
   "profile": "testing",
   "phone": "(210) 444-5656",
   "bio": "bunch of cool stuff about me",
-  "Department": 3,
+  "DepartmentId": 5
 }
 
-### Update professor information
+### Delete professor
+DELETE {{host}}/professors/4
+Authorization: Bearer {{token}}
 
 ### Get all departments
 GET {{host}}/departments
