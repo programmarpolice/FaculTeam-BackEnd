@@ -1,16 +1,19 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const PORT = 5173;
+const PORT = 3000;
 
 const cors = require("cors");
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: /localhost/ }));
 
 app.use(express.json());
 app.use(require("./api/auth").router);
 app.use("/departments", require("./api/departments"));
 app.use("/professors", require("./api/professors"));
 
+app.get("/", (req, res, next) => {
+  res.json("it's working Faculteam!");
+});
 app.use((req, res, next) => {
   next({ status: 404, message: "Endpoint not found." });
 });
